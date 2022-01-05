@@ -1,3 +1,5 @@
+//some note
+
 const b = null;
 
 function initiate() {
