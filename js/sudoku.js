@@ -1,6 +1,3 @@
-//some note
-//note on github
-
 const b = null;
 
 function initiate() {
@@ -102,13 +99,19 @@ function rowsGood(board) {
   for (var i = 0; i < 9; i++) {
     var cur = [];
     for (var j = 0; j < 9; j++) {
-      if (cur.includes(board[i][j])) {
+      // for cell value >9 or <1, we just need to check once -> to save validation time
+      if (
+        cur.includes(board[i][j]) ||
+        parseInt(board[i][j]) < 1 ||
+        parseInt(board[i][j]) > 9
+      ) {
         return false;
       } else if (board[i][j] != null) {
         cur.push(board[i][j]);
       }
     }
   }
+
   return true;
 }
 
@@ -160,28 +163,24 @@ function boxesGood(board) {
 
 function updateBoard(board) {
   if (board == false) {
-    for (i = 1; i <= 9; i++) {
-      document.getElementById("row " + String(i)).innerHTML =
-        "Solution not found";
-    }
+    inputIsInvalid()
   } else {
+    var current = 1;
     for (var i = 1; i <= 9; i++) {
-      var row = "";
       for (var j = 0; j < 9; j++) {
-        if (row == "") {
-          row = row + String(board[i - 1][j]);
-        } else {
-          row = row + "\xa0\xa0\xa0\xa0\xa0\xa0\xa0" + String(board[i - 1][j]);
-        }
-      }
-      document.getElementById("row " + String(i)).innerHTML = row;
+        document.getElementById("ans" + current).innerHTML = board[i-1][j];
+        current++;
     }
+
   }
+}
 }
 
 function inputIsInvalid() {
-  for (i = 1; i <= 9; i++) {
-    document.getElementById("row " + String(i)).innerHTML =
-      "Solution not found";
-  }
+  
+  document.getElementById("invalid-notice").innerHTML = "Solution not found. Please refresh and try again."
+  document.getElementById('output-grid').remove()
+  document.getElementById('submit-button').remove()
+  document.getElementById('answer-notice').remove()
+
 }
