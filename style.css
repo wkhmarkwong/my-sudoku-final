@@ -55,3 +55,17 @@ p {
 .submit-button {
   margin: 20px 0px 20px 0px;
 }
+
+.phone-remind {
+  font-size: 15px;
+}
+
+@media screen and (max-width: 480px) {
+  .grid {
+    width: 300px;
+  }
+
+  .cell {
+    width: 33px;
+  }
+}
